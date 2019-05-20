@@ -1,6 +1,7 @@
 import React from "react"
 import classes from "./Car.css"
-import Radium from "radium"
+import withClass from "../hoc/withClass"
+import PropTypes from "prop-types"
 
 /*function car() {
     return(
@@ -15,41 +16,59 @@ import Radium from "radium"
 <strong>test strong</strong>
     </div>);*/
 
-const Car = (props) => {
-    const inputClasses = [classes.input];
+class Car extends React.Component {
 
-    if (props.name !== ""){
-        inputClasses.push(classes.green);
-    } else {
-        inputClasses.push(classes.red);
-    }
+    constructor(props) {
+        super(props);
+        this.inputRef = React.createRef()
+    };
 
-    if (props.name.length>4){
-        inputClasses.push(classes.bold)
-    }
-
-    const  style = {
-        border: "1px solid #ccc",
-        boxShadow: "0 4px 5px 0 rgba(0, 0, 0, .14)",
-        ":hover":{
-            border: "1px solid #aaa",
-            boxShadow: "0 4px 15px rgba(0, 0, 0, .25)",
-            cursor: "pointer"
+    componentDidMount() {
+        if (this.props.index === 0) {
+            this.inputRef.current.focus();
         }
     };
 
-    return (
-        <div className={classes.Car} style={style}>
-            <h3>Car name: {props.name}</h3>
-            <p>YEAR: <strong>{props.year}</strong></p>
-            <input
-                type="text"
-                onChange={props.onChangeName}
-                value={props.name}
-                className={inputClasses.join(" ")}
-            />
-            <button onClick={props.onDelete}>Delete</button>
-        </div>);
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return nextProps.name.trim() !== this.props.name.trim();
+    };
+
+    render() {
+
+        const inputClasses = [classes.input];
+
+        if (this.props.name !== ""){
+            inputClasses.push(classes.green);
+        } else {
+            inputClasses.push(classes.red);
+        }
+
+        if (this.props.name.length>4){
+            inputClasses.push(classes.bold)
+        }
+
+        return (
+            <React.Fragment>
+                <h3>Car name: {this.props.name}</h3>
+                <p>YEAR: <strong>{this.props.year}</strong></p>
+                <input
+                    ref={this.inputRef}
+                    type="text"
+                    onChange={this.props.onChangeName}
+                    value={this.props.name}
+                    className={inputClasses.join(" ")}
+                />
+                <button onClick={this.props.onDelete}>Delete</button>
+            </React.Fragment>);
+    }
+}
+
+Car.propTypes = {
+    name: PropTypes.string.isRequired,
+    year: PropTypes.number,
+    index: PropTypes.number,
+    onChangeName: PropTypes.func,
+    onDelete: PropTypes.func
 };
 
-export default Radium(Car)
+export default withClass(Car, classes.Car)
