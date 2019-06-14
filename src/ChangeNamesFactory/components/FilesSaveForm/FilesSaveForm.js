@@ -20,7 +20,7 @@ export default function FilesSaveForm(props) {
     return (
         <a id="a_btn_writetofile" download="createdZipFile.zip" href={objUrl} className="btn btn-primary"
         >
-            Write To File
+            Скачать архив с переименованными файлами
         </a>
     )
 }

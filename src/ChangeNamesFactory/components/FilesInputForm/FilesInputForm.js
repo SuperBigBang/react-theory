@@ -17,9 +17,9 @@ export default function FilesInputForm(props) {
         let zip = new JSZip();
 
         for (let i = 0; i < acceptedFiles.length; i++) {
-            console.log("Проходы по файлам: " + i);
+            // console.log("Проходы по файлам: " + i);
             for (let j = 0; j < bigData.length; j++) {
-                console.log("Проходы по базе: " + j);
+                // console.log("Проходы по базе: " + j);
                 const bigDataElement = bigData[j];
                 if (bigDataElement.split(";")[0].toUpperCase() === acceptedFiles[i].name.toUpperCase().split(".JPG")[0]) {
                     addToZIP(zip, acceptedFiles[i], bigDataElement.split(";")[1] + ".JPG");
@@ -48,7 +48,7 @@ export default function FilesInputForm(props) {
             {
                 isDragActive ?
                     <p>Drop the files here ...</p> :
-                    <p>Drag 'n' drop some files here, or click to select files</p>
+                    <p>Подгрузить файлы/изображения для переименования</p>
             }
         </div>
     )
