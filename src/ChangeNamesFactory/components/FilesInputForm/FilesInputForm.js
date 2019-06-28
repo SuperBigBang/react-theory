@@ -11,7 +11,7 @@ export default function FilesInputForm(props) {
         for (let i = 0; i < acceptedFiles.length; i++) {
             console.log(acceptedFiles[i].name);
         }
-        console.log("Всего принято файлов: " + acceptedFiles.length)
+        console.log("Всего принято файлов: " + acceptedFiles.length);
 
 
         let zip = new JSZip();
@@ -43,7 +43,7 @@ export default function FilesInputForm(props) {
 
 
     return (
-        <div {...getRootProps()} >
+        <div {...getRootProps()}>
             <input {...getInputProps()} />
             {
                 isDragActive ?

@@ -1,3 +1,4 @@
-.InputFilesForm {
-    border: 5px dashed blue;
+p {
+    border: 2px dotted blue;
+    cursor: pointer;
 }
